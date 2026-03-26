@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.taller.grade.application.Grade;
+import com.taller.grade.domain.Grade;
 
 public class Student {
 

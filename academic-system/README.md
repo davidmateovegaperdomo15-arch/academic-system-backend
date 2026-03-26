@@ -60,3 +60,21 @@ If you want to learn more about building native executables, please consult <htt
 Easily start your REST Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+# Academic System Backend
+
+Proyecto backend en Java usando Quarkus.
+
+## Progreso
+
+- [x] Modelado de dominio (Student, Grade)
+- [x] Validaciones
+- [x] DTOs
+- [ ] Persistencia
+- [ ] API REST completa
+
+## Arquitectura
+
+- Domain-driven design básico
+- Separación por capas
+- DTO pattern
