@@ -1,6 +1,6 @@
 package com.taller.student.api;
 
-import com.taller.student.application.StudentService;
+import com.taller.student.application.StudentServiceImpl;
 import com.taller.student.dto.StudentDTO;
 import com.taller.student.dto.StudentResponseDTO;
 
@@ -12,9 +12,9 @@ import jakarta.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 public class StudentResource {
 
-    private final StudentService service;
+    private final StudentServiceImpl service;
 
-    public StudentResource(StudentService service) {
+    public StudentResource(StudentServiceImpl service) {
         this.service = service;
     }
 
