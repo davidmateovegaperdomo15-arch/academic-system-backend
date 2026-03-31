@@ -1,15 +1,17 @@
 package com.taller.student.application;
 
-import com.taller.student.domain.Student;
-import com.taller.student.domain.StudentRepository;
+import com.taller.student.domain.model.Student;
+import com.taller.student.domain.repository.StudentRepository;
 import com.taller.student.dto.StudentDTO;
 import com.taller.student.dto.StudentResponseDTO;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.util.List;
-
+@ApplicationScoped
 public class StudentService {
-
-    private final StudentRepository repository;
+    @Inject
+    StudentRepository repository;
 
     public StudentResponseDTO createStudent(StudentDTO dto) {
         Student student = new Student(null, dto.name, dto.email);

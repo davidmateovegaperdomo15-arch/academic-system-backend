@@ -1,4 +1,6 @@
-package com.taller.student.domain;
+package com.taller.student.domain.repository;
+
+import com.taller.student.domain.model.Student;
 
 import java.util.List;
 import java.util.Optional;

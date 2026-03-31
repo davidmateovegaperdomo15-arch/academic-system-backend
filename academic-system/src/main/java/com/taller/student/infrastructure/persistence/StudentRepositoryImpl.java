@@ -1,4 +1,4 @@
-package com.taller.student.domain;
+package com.taller.student.infrastructure.persistence;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.taller.student.domain.model.Student;
+import com.taller.student.domain.repository.StudentRepository;
+import jakarta.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class StudentRepositoryImpl implements StudentRepository {
 
     private Map<Long, Student> database = new HashMap<>();

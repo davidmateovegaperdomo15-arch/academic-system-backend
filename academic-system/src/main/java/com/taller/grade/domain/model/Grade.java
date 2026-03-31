@@ -1,4 +1,4 @@
-package com.taller.grade.application;
+package com.taller.grade.domain.model;
 
 public class Grade {
 
