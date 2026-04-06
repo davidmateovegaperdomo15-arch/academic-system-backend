@@ -3,18 +3,23 @@ package com.taller.grade.domain.model;
 public class Grade {
 
     private Long id;
-    private double value;
+    private Double value;
+    private Long studentId;
 
-    public Grade(Long id, double value) {
+    public Grade(Long id, Double value) {
         validateValue(value);
+        if(studentId == null) {
+            throw  new IllegalArgumentException("Student id is null");
+        }
         this.id = id;
         this.value = value;
+        this.studentId = studentId;
     }
 
     public Long getId() {
         return id;
     }
-
+    public Long getStudentId() {return studentId;}
     public double getValue() {
         return value;
     }

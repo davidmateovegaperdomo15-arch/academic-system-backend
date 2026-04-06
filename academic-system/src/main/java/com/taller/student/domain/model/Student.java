@@ -3,36 +3,26 @@ package com.taller.student.domain.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import com.taller.grade.domain.model.Grade;
+import com.taller.grade.domain.service.GradeCalculator;
+import com.taller.shared.domain.model.Person;
 
-public class Student {
+public class Student extends Person {
 
     private Long id;
-    private String name;
-    private String email;
     private List<Grade> grades;
 
     public Student(Long id, String name, String email) {
-        validateName(name);
-        validateEmail(email);
+        super(name, email);
 
         this.id = id;
-        this.name = name;
-        this.email = email;
         this.grades = new ArrayList<>();
     }
 
     public Long getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public List<Grade> getGrades() {
@@ -51,36 +41,30 @@ public class Student {
         grades.add(grade);
     }
 
-    public double calculateAverage() {
-        if (grades.isEmpty()) {
-            return 0.0;
+    public double calculateFinalGrade(GradeCalculator calculator) {
+        if (calculator == null) {
+            throw new IllegalArgumentException("Calculator cannot be null");
         }
-
-        return grades.stream()
-                .mapToDouble(Grade::getValue)
-                .average()
-                .orElse(0.0);
+        // Le pasamos la lista inmutable de notas a la calculadora
+        return calculator.calculate(this.grades);
     }
 
-    public void updateName(String name) {
-        validateName(name);
-        this.name = name;
+    @Override
+    public boolean equals(Object o) {
+        // 1. Si son exactamente el mismo espacio en memoria, son iguales
+        if (this == o) return true;
+
+        // 2. Si el otro objeto es nulo o ni siquiera es de la clase Student, no son iguales
+        if (o == null || getClass() != o.getClass()) return false;
+
+        // 3. Los comparamos por su ID (su identidad)
+        Student student = (Student) o;
+        return Objects.equals(id, student.id);
     }
 
-    public void updateEmail(String email) {
-        validateEmail(email);
-        this.email = email;
-    }
-
-    private void validateName(String name) {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Name cannot be empty");
-        }
-    }
-
-    private void validateEmail(String email) {
-        if (email == null || !email.contains("@")) {
-            throw new IllegalArgumentException("Invalid email");
-        }
+    @Override
+    public int hashCode() {
+        // Generamos el hash basados ÚNICAMENTE en el ID
+        return Objects.hash(id);
     }
 }

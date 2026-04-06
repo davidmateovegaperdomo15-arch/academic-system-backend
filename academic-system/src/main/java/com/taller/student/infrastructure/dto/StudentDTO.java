@@ -1,4 +1,4 @@
-package com.taller.student.dto;
+package com.taller.student.infrastructure.dto;
 
 public class StudentDTO {
 
