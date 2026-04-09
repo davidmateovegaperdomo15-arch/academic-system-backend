@@ -1,5 +1,6 @@
-package com.taller.student.infrastructure.persistence;
+package com.taller.student.infrastructure.persistence.entity;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class StudentEntity {
   @Column(nullable = false, length = 60) // No puede ser nulo en BD y máximo 60 caracteres
   private String name;
 
+
   @Column(nullable = false, unique = true) // El email no se puede repetir en la tabla
   private String email;
 
@@ -24,5 +26,28 @@ public class StudentEntity {
     orphanRemoval = true)//Mata huerfanos
   private List<GradeEntity> grades = new ArrayList<>();
 
-  // ... getters y setters vacíos obligatorios para que Hibernate funcione ...
+  // Constructores (Hibernate necesita un constructor vacío)
+  public StudentEntity() {}
+
+  public StudentEntity(Long id, String name, String email) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+  }
+
+  // Getters y Setters
+  public Long getId() { return id; }
+  public void setId(Long id) { this.id = id; }
+  public String getName() { return name; }
+  public void setName(String name) { this.name = name; }
+  public String getEmail() { return email; }
+  public void setEmail(String email) { this.email = email; }
+  public List<GradeEntity> getGrades() { return grades; }
+  public void setGrades(List<GradeEntity> grades) { this.grades = grades; }
+
+  // Método de conveniencia para mantener la relación bidireccional sincronizada
+  public void addGrade(GradeEntity grade) {
+    grades.add(grade);
+    grade.setStudent(this);
+  }
 }
