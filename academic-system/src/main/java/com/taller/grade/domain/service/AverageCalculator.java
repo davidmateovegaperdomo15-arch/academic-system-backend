@@ -1,8 +1,13 @@
 package com.taller.grade.domain.service;
 
 import com.taller.grade.domain.model.Grade;
-import java.util.List;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
+import jdk.jfr.Name;
 
+import java.util.List;
+@ApplicationScoped
+@Named("calculadoraPromedio")
 public class AverageCalculator implements GradeCalculator {
 
   @Override
