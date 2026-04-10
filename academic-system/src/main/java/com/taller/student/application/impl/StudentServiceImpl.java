@@ -21,7 +21,7 @@ public class StudentServiceImpl implements StudentService {
   private final GradeCalculator gradeCalculator;
   //@inject implicito al parecer
 
-  public StudentServiceImpl(StudentRepository repository,
+  public StudentServiceImpl(@Named("Jpa") StudentRepository repository,
                             @Named("calculadoraPromedio") GradeCalculator gradeCalculator) {
     this.repository = repository;
     this.gradeCalculator = gradeCalculator;

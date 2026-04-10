@@ -9,8 +9,10 @@ import java.util.Optional;
 import com.taller.student.domain.model.Student;
 import com.taller.student.domain.repository.StudentRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 
 @ApplicationScoped
+@Named("Impl")
 public class StudentRepositoryImpl implements StudentRepository {
 
     private Map<Long, Student> database = new HashMap<>();
