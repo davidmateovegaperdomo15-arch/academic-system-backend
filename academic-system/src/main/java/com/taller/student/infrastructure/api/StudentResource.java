@@ -24,6 +24,8 @@ public class StudentResource {
 
     @POST
     public Response create(StudentDTO dto) {
+        //TAREA: @Bodyrequest en quarkus o parecidos. @POST recibe parametros tambien pero en spring, ver si se puede hacer algo parecido aca
+        //SWAGGER investigar a fondo Fast APi like
         StudentResponseDTO responseDTO = service.createStudent(dto);
         return Response.status(Response.Status.CREATED).entity(responseDTO).build();
     }

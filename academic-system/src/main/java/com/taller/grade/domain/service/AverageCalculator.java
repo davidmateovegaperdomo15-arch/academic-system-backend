@@ -7,7 +7,6 @@ import jdk.jfr.Name;
 
 import java.util.List;
 @ApplicationScoped
-@Named("calculadoraPromedio")
 public class AverageCalculator implements GradeCalculator {
 
   @Override

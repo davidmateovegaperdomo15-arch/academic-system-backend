@@ -29,7 +29,10 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public Optional<Student> findById(Long id) {
-        return Optional.ofNullable(database.get(id));
+        return Optional.ofNullable(database.get(id)
+            //TAREA: Manejo de datos nullos
+            //
+        );
     }
 
     @Override

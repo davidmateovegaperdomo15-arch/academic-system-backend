@@ -20,9 +20,8 @@ public class StudentServiceImpl implements StudentService {
   private final StudentRepository repository;
   private final GradeCalculator gradeCalculator;
   //@inject implicito al parecer
-
   public StudentServiceImpl(@Named("Jpa") StudentRepository repository,
-                            @Named("calculadoraPromedio") GradeCalculator gradeCalculator) {
+                            GradeCalculator gradeCalculator) {
     this.repository = repository;
     this.gradeCalculator = gradeCalculator;
   }
@@ -31,9 +30,8 @@ public class StudentServiceImpl implements StudentService {
     Student student = new Student(null, dto.name, dto.email);
     Student saved = repository.save(student);
     return StudentMapper.toResponseDTO(saved, gradeCalculator);
+    //Tarea estudiar para pasarla a funcional a ver que sale
   }
-
-
   @Override
   //Check ahora mas rato que son las seis, que paja
   public List<StudentResponseDTO> getAllStudents() {
@@ -45,6 +43,7 @@ public class StudentServiceImpl implements StudentService {
 
   @Override
   public StudentResponseDTO getStudentById(Long id) {
+    // TAREA: IF id es nullo pues hacer cosas preventivas. revisar parecidos al of Nullable pero no de optional
     // Buscamos, si no existe lanzamos error, si existe mapeamos
     return repository.findById(id)
       .map(student -> StudentMapper.toResponseDTO(student, gradeCalculator))
