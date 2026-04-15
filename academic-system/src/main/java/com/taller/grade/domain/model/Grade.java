@@ -15,7 +15,6 @@ public class Grade {
         this.value = value;
         this.studentId = studentId;
     }
-
     public Long getId() {
         return id;
     }

@@ -38,11 +38,11 @@ public class StudentRepositoryJpa implements StudentRepository {
 
     @Override
     public Optional<Student> findById(Long id) {
-        // Busca en la tabla por Primary Key (Hace el SELECT)
         //TAREA: Long id no puede ser nullo
         StudentEntity entity = em.find(StudentEntity.class, id);
 
         if (entity == null) {
+            //"Programacion defensiva"
             return Optional.empty();
         }
         return Optional.of(new Student(entity.getId(), entity.getName(), entity.getEmail()));
