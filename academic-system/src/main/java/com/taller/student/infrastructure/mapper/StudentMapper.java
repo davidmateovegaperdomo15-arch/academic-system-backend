@@ -18,6 +18,8 @@ public class StudentMapper {
    * el frontend no se rompe porque este Mapper lo adapta al DTO original.
    * 3. Limpieza: Quitamos este código aburrido de "seteo" de la capa de lógica de negocio.
    */
+
+
   public static StudentResponseDTO toResponseDTO(Student student, GradeCalculator calculator) {
     if (student == null) {
       return null;
@@ -36,4 +38,16 @@ public class StudentMapper {
 
     return dto;
   }
+  /*
+  public static StudentResponseDTO toResponseDTO(Student student, GradeCalculator calculator) {
+    if (student == null) return null;
+
+    // ¡Mira qué limpio se lee el Patrón Builder!
+    return new StudentResponseDTO.Builder()
+      .id(student.getId())
+      .name(student.getName())
+      .email(student.getEmail())
+      .averageGrade(student.calculateFinalGrade(calculator))
+      .build();
+  }*/
 }

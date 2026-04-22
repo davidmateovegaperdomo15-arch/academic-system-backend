@@ -1,10 +1,11 @@
-package com.taller.student.application.impl;
+package com.taller.student.application.usecase.impl;
 
 import com.taller.grade.domain.model.Grade;
 import com.taller.grade.domain.service.GradeCalculator;
 import com.taller.student.application.StudentService;
 import com.taller.student.domain.model.Student;
 import com.taller.student.domain.repository.StudentRepository;
+import com.taller.shared.exception.ResourceNotFoundException;
 import com.taller.student.infrastructure.dto.StudentDTO;
 import com.taller.student.infrastructure.dto.StudentResponseDTO;
 import com.taller.student.infrastructure.mapper.StudentMapper;
@@ -21,7 +22,7 @@ public class StudentServiceImpl implements StudentService {
   private final StudentRepository repository;
   private final GradeCalculator gradeCalculator;
   //@inject implicito al parecer
-  public StudentServiceImpl(@Named("Impl") StudentRepository repository,
+  public StudentServiceImpl(@Named("Jpa") StudentRepository repository,
                             GradeCalculator gradeCalculator) {
     this.repository = repository;
     this.gradeCalculator = gradeCalculator;
@@ -47,18 +48,21 @@ public class StudentServiceImpl implements StudentService {
     // TAREA: IF id es nullo pues hacer cosas preventivas. revisar parecidos al of Nullable pero no de optional
     // Buscamos, si no existe lanzamos error, si existe mapeamos
     Objects.requireNonNull(id, "El ID para buscar no puede ser nulo");
-    if (id == null) {
+    /*if (id == null) {
       throw new IllegalArgumentException("No se puede buscar un estudiante sin proporcionar un ID válido.");
-    }
+    }*/
     return repository.findById(id)
       .map(student -> StudentMapper.toResponseDTO(student, gradeCalculator))
-      .orElseThrow(() -> new IllegalArgumentException("Student not found with id: " + id));
+      .orElseThrow(() -> new ResourceNotFoundException("Student", id));
   }
 
   @Override
   public void deleteStudentById(Long id) {
+    Objects.requireNonNull(id, "El ID para eliminar no puede ser nulo");
+    if (repository.findById(id).isEmpty()) {
+      throw new ResourceNotFoundException("Student", id);
+    }
     repository.deleteById(id);
-
   }
 
   @Override

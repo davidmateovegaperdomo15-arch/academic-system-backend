@@ -8,12 +8,9 @@ public class Grade {
 
     public Grade(Long id, Double value) {
         validateValue(value);
-        if(studentId == null) {
-            throw  new IllegalArgumentException("Student id is null");
-        }
         this.id = id;
         this.value = value;
-        this.studentId = studentId;
+        this.studentId = null;
     }
     public Long getId() {
         return id;

@@ -10,7 +10,7 @@ public class GradeEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
+  @Column(name = "grade_value", nullable = false)
   private double value;
 
   // Relación N:1 -> Muchas notas pertenecen a un estudiante
